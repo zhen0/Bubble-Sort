@@ -1,9 +1,23 @@
-beforeAll(function() {
-  spyOn(bubble, "swap").and.callThrough(); // replace existing `tootsiepop['lick']` method
-});
-it("getting to the center of tootsiepop involves exactly three licks", function() {
-  bubble.bubbleSort([]);
-  expect(bubble.swap.calls.count()).toEqual(0);
+describe("swap", function() {
+  beforeAll(function() {
+    spyOn(bubble, "swap").and.callThrough(); // replace existing `tootsiepop['lick']` method
+  });
+  it("has no swaps on empty array", function() {
+    bubble.bubbleSort([]);
+    expect(bubble.swap.calls.count()).toEqual(0);
+  });
+  it("has no swaps on an array of one", function() {
+    bubble.bubbleSort([3]);
+    expect(bubble.swap.calls.count()).toEqual(0);
+  });
+  it("has 1 swap on an array of two", function() {
+    bubble.bubbleSort([4, 2]);
+    expect(bubble.swap.calls.count()).toEqual(1);
+  });
+  it("has less than 10 swaps on an array of ten", function() {
+    bubble.bubbleSort([1, 2, 3, 5, 6, 8, 9, 10, 18]);
+    expect(bubble.swap.calls.count()).toBeLessThan(10);
+  });
 });
 
 describe("Bubble Sort", function() {
